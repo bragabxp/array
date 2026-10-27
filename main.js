@@ -1,7 +1,29 @@
-const nomes = ["Afonso", "Henriques", "Lagedo"]
-nomes.push("Silva")
-const lista = document.getElementById("lista")
+let alunos = ["Arthur, Hipolito , Braga"];
 
-for (let nome of nomes){
-    lista.innerHTML += `<li>${nome}</li>`  
+const formulario = document.getElementById("formulario");
+const campoNome = document.getElementById("nome");
+const lista = document.getElementById("lista");
+
+function mostrarNomes() {
+    lista.innerHTML = "";
+
+    alunos.forEach(function(nome) {
+        let item = document.createElement("li");
+        item.textContent = nome;
+        lista.appendChild(item);
+    });
 }
+
+formulario.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let novoNome = campoNome.value.trim();
+
+    if (novoNome !== "") {
+        alunos.push(novoNome);
+        mostrarNomes();
+        campoNome.value = "";
+    }
+});
+
+mostrarNomes();
